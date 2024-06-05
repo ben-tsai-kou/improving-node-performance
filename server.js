@@ -1,5 +1,4 @@
 const express = require('express');
-const cluster = require('cluster');
 
 const app = express();
 
@@ -20,11 +19,5 @@ app.get('/timer', (req, res) => {
 });
 
 console.log('fire up the engines!');
-if (cluster.isMaster) {
-  console.log(`Master ${process.pid} is running`);
-  cluster.fork();
-  cluster.fork();
-} else {
-  console.log(`Worker ${process.pid} started`);
-  app.listen(3000);
-}
+console.log(`Worker ${process.pid} started`);
+app.listen(3000);
